@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { ThemeProvider } from "@material-ui/core";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
+import Theme from "./config/Theme";
+import NavbarDashboard from "./components/Navbar/NavbarDashboard";
+import LoginForm from "./components/Users/Login/LoginForm";
+import RegistrationForm from "./components/Users/Register/RegistrationForm";
+import ProductsList from "./components/Products/ProductsList";
+import CustomersList from "./components/Customers/CustomersList";
+import SalesList from "./components/Sales/SalesList";
+import SalesForm from "./components/Sales/SalesForm";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ThemeProvider theme={Theme}>
+        <BrowserRouter>
+          <NavbarDashboard />
+          <Switch>
+            <Route exact path="/login" component={LoginForm} />
+            <Route exact path="/register" component={RegistrationForm} />
+            <Route exact path="/products" component={ProductsList} />
+            <Route exact path="/customers" component={CustomersList} />
+
+            <Route exact path="/sales" component={SalesForm} />
+          </Switch>
+        </BrowserRouter>
+      </ThemeProvider>
     </div>
   );
-}
+};
 
 export default App;
